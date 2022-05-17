@@ -1,8 +1,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-const double pct_interno = 0.25;
-const int cant_externo = 5000;
+extern const double pct_interno = 0.25;
+extern const int cant_externo = 5000;
 typedef struct seccion {
     int id ;
     int asientos ;
