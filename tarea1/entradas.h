@@ -29,6 +29,6 @@ typedef struct cola{
     fans *final;
 }queue;
 
-//nota: vamos a crear la cola con la cantidad de personas totales, ojo, si la persona no le da el presupuesto para comprar ninguna, se marca como 0, tanto el n_sec
-//como la entrada, al final, tendre un contador al momento de pasar por la lista enlazada de secciones, el cual me dira la cantidad de personas que compraron y la cantidad
-//que no compro.
+/*  nota: vamos a crear la cola con la cantidad de personas totales, ojo, si la persona no le da el presupuesto para comprar ninguna, se marca como 0, tanto el n_sec
+    como la entrada, al final, se tendra un contador al momento de pasar por la lista enlazada de secciones, el cual me dira la cantidad de personas que compraron y la cantidad
+    que no compro.  */

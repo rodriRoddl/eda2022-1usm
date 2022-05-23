@@ -29,22 +29,24 @@ int main(int argc, char **argv){
         append(cabeza,ide,asi,ultimo_fac);
     }
     fclose(arch);
+    ordenar_lista(cabeza);
     node_stadium(&estadio,cabeza,nsec,pre);
     int suma_asientos = list_sum(cabeza);
     //VEMOS LA FILA DE CLIENTES, ITEM 2, USO DE COLAS
     srand(time(NULL));
-    int nro_clientes = (rand () % (20 - 5 + 1) + 5); //forma natural de determinar un randon entre rangos: (M - n + 1) + n, con M mayor y n menor
-    int precio_alto = 3*pre*primer_fac;                       //linea 35, multiplicar por suma_asientos
+    long int nro_clientes = (rand () % (20 - 5 + 1) + 5); //forma natural de determinar un randon entre rangos: (M - n + 1) + n, con M mayor y n menor
+    int precio_alto = 3*pre*primer_fac;                       //linea 36, multiplicar por suma_asientos
     int precio_bajo = 0.5*pre*ultimo_fac;
     queue *cola = malloc(sizeof(queue));
     cola->head = NULL;
     cola->final= NULL;
     int percent = pct_interno*suma_asientos;
+    printf("\nSECCIONES ORDENADAS DE LA MAS CARA A LA MAS BARATA\n\n");
     for(int i=1;i<=nro_clientes;i++){
         int ident = 20000 + i;
         char *id = malloc(sizeof(char[20]));
         itoa(ident,id,10);
-        int presupuesto = rand() % (precio_alto - precio_bajo +1) + precio_bajo; //sacar la multi de rand, solo dejarlo con rand
+        long int presupuesto = 2*(rand() % (precio_alto - precio_bajo +1) + precio_bajo); //sacar la multi de rand, solo dejarlo con rand
         int n_sec = nro_seccion_cliente(cabeza,presupuesto,pre);
         int c_entr = cantidad_entradas(cabeza,presupuesto,pre);
         enqueue(cola,id,presupuesto,n_sec,c_entr);
@@ -52,11 +54,12 @@ int main(int argc, char **argv){
             lista_externa_sum(cabeza);
         }
         if(i % 4 == 0){
+            FILE *archivo;
             percent = percent + percent;
             int cantidad_actual = list_sum(cabeza);
-            int recaudacion = recaudacion_queue(cola,estadio);
-            //sprintf("cantidad de entradas vendidas:%d , entradas restantes: %d\n",cantidad_actual,suma_asientos - cantidad_actual);
-            //sprintf("")
+            long int recaudacion = recaudacion_queue(cola,estadio);
+            printf("\ncantidad de entradas vendidas %d\nentradas restantes %d\n",suma_asientos - cantidad_actual,cantidad_actual);
+            printf("recaudacion total:%li\n",recaudacion);
         }
     }
     free(cola);

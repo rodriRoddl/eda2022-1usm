@@ -44,6 +44,41 @@ int list_sum(sector *cabeza){
     return suma_asientos;
 }
 
+void ordenar_lista(sector *cabeza){
+    sector *recorrer = cabeza;
+    int t_id ;
+    int t_asientos ;
+    float t_factor ;
+    int counter = 0;
+    while(recorrer){
+        recorrer = recorrer->sgte;
+        counter = counter + 1;
+    }
+    recorrer = cabeza;
+    for(int i = 0;i<counter;i++){
+        while(recorrer->sgte){
+            if(recorrer->factor < recorrer->sgte->factor){
+                t_id = recorrer->id;
+                recorrer->id = recorrer->sgte->id;
+                recorrer->sgte->id = t_id;
+
+                t_asientos = recorrer->asientos;
+                recorrer->asientos = recorrer->sgte->asientos;
+                recorrer->sgte->asientos = t_asientos;
+
+                t_factor = recorrer->factor;
+                recorrer->factor = recorrer->sgte->factor;
+                recorrer->sgte->factor = t_factor;
+                recorrer = recorrer->sgte;
+            }
+            else{
+                recorrer = recorrer->sgte;
+            }
+        }
+        recorrer = cabeza;
+    }
+}
+
 //IMPLEMENTACION DE FUNCIONES DE COLA PARA CLIENTES
 
 void enqueue(queue *cola,char *id,int presupuesto,int n_seccion,int n_entradas){
@@ -112,21 +147,30 @@ void lista_externa_sum(sector *cabeza){
     printf("---Fin De Lista---\n\n");
 }
 
+int run_queue(queue *cola, sector*cabeza, int pbase); // declaracion de variable interna que solo usa una funcion que se conecta al .c externo
+
 int recaudacion_queue(queue *cola,stadium *cabeza){
-    fans *temp = cola->head;
     sector *recorrer = cabeza->secc;
     int recaudacion = 0;
     while(recorrer!=NULL){
-        int recaudacion_por_seccion =0;
-        while(temp!=NULL){
-            if(temp->n_seccion == recorrer->id){
-                recaudacion = recaudacion + (cabeza->pbase*recorrer->factor)*temp->n_entradas;
-                recaudacion_por_seccion = recaudacion_por_seccion + (cabeza->pbase*recorrer->factor)*temp->n_entradas;
-            }
-            temp = temp->sgte;
-        }
-        printf("recaudacion de seccion:%d:%d\n",recorrer->id,recaudacion_por_seccion);
+        int recaudacion_por_seccion = 0;
+        recaudacion_por_seccion = run_queue(cola,recorrer,cabeza->pbase);
+        recaudacion = recaudacion + run_queue(cola,recorrer,cabeza->pbase);
+        printf("sector %d --- recaudacion de la seccion %d\n",recorrer->id,recaudacion_por_seccion);
         recorrer = recorrer->sgte;
+    }
+    return recaudacion;
+}
+
+int run_queue(queue *cola, sector*cabeza, int pbase){
+    fans *temp = cola->head;
+    sector *recorrer = cabeza;
+    int recaudacion = 0;
+    while(temp!=NULL){
+        if(temp->n_seccion == recorrer->id){
+            recaudacion = recaudacion + (pbase*recorrer->factor)*temp->n_entradas;
+        }
+        temp = temp->sgte;
     }
     return recaudacion;
 }

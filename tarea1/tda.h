@@ -7,7 +7,7 @@ void node_stadium(stadium **cabeza,sector *head,int cant_sec, int pbase);
 void first_node(sector **cabeza,int id, int asientos,float factor);
 void append(sector *cabeza,int id, int asientos,float factor);
 int list_sum(sector *cabeza);
-
+void ordenar_lista(sector *cabeza);
 //FUNCIONES PARA LA FILA DE CLIENTES *COLA
 void enqueue(queue *cola,char *id,int presupuesto,int n_seccion,int n_entradas);
 void print_queue(queue *cola);
