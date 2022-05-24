@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "entradas.h"
 #include "tda.h"
@@ -34,33 +35,45 @@ int main(int argc, char **argv){
     int suma_asientos = list_sum(cabeza);
     //VEMOS LA FILA DE CLIENTES, ITEM 2, USO DE COLAS
     srand(time(NULL));
-    long int nro_clientes = (rand () % (20 - 5 + 1) + 5); //forma natural de determinar un randon entre rangos: (M - n + 1) + n, con M mayor y n menor
+    long int nro_clientes = /*suma_asientos**/5000*(rand () % (20 - 5 + 1) + 5); //forma natural de determinar un randon entre rangos: (M - n + 1) + n, con M mayor y n menor
     int precio_alto = 3*pre*primer_fac;                       //linea 36, multiplicar por suma_asientos
     int precio_bajo = 0.5*pre*ultimo_fac;
     queue *cola = malloc(sizeof(queue));
     cola->head = NULL;
     cola->final= NULL;
-    int percent = pct_interno*suma_asientos;
+    int factor_percent = 1;
+    int porcentaje = pct_interno*suma_asientos*factor_percent;
     printf("\nSECCIONES ORDENADAS DE LA MAS CARA A LA MAS BARATA\n\n");
-    for(int i=1;i<=nro_clientes;i++){
+    int i = 1;
+    int entradas = 0;
+    while(i<=nro_clientes){
         int ident = 20000 + i;
         char *id = malloc(sizeof(char[20]));
-        itoa(ident,id,10);
-        long int presupuesto = 2*(rand() % (precio_alto - precio_bajo +1) + precio_bajo); //sacar la multi de rand, solo dejarlo con rand
+        sprintf(id,"%d",ident);
+        long int presupuesto = 3*(rand() % (precio_alto - precio_bajo +1) + precio_bajo); //sacar la multi de rand, solo dejarlo con rand
         int n_sec = nro_seccion_cliente(cabeza,presupuesto,pre);
         int c_entr = cantidad_entradas(cabeza,presupuesto,pre);
         enqueue(cola,id,presupuesto,n_sec,c_entr);
-        if(i % 4 == 0){                                       //cambiar 4 por cant_ext //
+        entradas = entradas + c_entr;
+        if(entradas % cant_externo == 0){
             lista_externa_sum(cabeza);
         }
-        if(i % 4 == 0){
-            FILE *archivo;
-            percent = percent + percent;
+        if(entradas %  porcentaje == 0){
+            if(porcentaje ==100){
+                break;
+            }
+            char *nombre = malloc(sizeof(char[20]));
+            sprintf(nombre,"%0.0f",factor_percent*pct_interno*100);
+            strcat(nombre,"%");
+            strcat(nombre,".txt");
+            FILE *archivo = fopen(nombre,"w");
             int cantidad_actual = list_sum(cabeza);
-            long int recaudacion = recaudacion_queue(cola,estadio);
-            printf("\ncantidad de entradas vendidas %d\nentradas restantes %d\n",suma_asientos - cantidad_actual,cantidad_actual);
-            printf("recaudacion total:%li\n",recaudacion);
+            long int recaudacion = recaudacion_queue(cola,estadio,archivo);
+            fprintf(archivo,"\ncantidad de entradas vendidas %d\nentradas restantes %d\n",suma_asientos - cantidad_actual,cantidad_actual);
+            fprintf(archivo,"recaudacion total %li\n\n",recaudacion);
+            factor_percent = factor_percent +1;
         }
+        i= i + 1;
     }
     free(cola);
     free(estadio);
