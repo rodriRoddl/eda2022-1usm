@@ -72,8 +72,9 @@ int main(int argc, char **argv){
             long int recaudacion = recaudacion_queue(cola,estadio,archivo);
             fprintf(archivo,"\ncantidad de entradas vendidas %d\nentradas restantes %d\n",suma_asientos - cantidad_actual,cantidad_actual);
             fprintf(archivo,"recaudacion total %li\n\n",recaudacion);
-            porcentaje += porcentaje;
             factor_percent +=1;
+            porcentaje = factor_percent*pct_interno*suma_asientos;
+            free(nombre);
         }
     }
 
