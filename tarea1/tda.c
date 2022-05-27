@@ -126,8 +126,8 @@ int cantidad_entradas(sector *cabeza, int presupuesto, int precio){
             if(presupuesto >= precio_boleto && recorrer->asientos>0){
                 recorrer->asientos = recorrer->asientos -1;
                 nro_boletos = 2;
-                break;
             }
+            break;
         }
         recorrer = recorrer->sgte;
     }
@@ -154,8 +154,9 @@ long int run_queue(queue *cola, sector*cabeza, int pbase); // declaracion de var
 long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch){
     sector *recorrer = cabeza->secc;
     long int recaudacion = 0;
+    long int recaudacion_por_seccion;
     while(recorrer!=NULL){
-        long int recaudacion_por_seccion = 0;
+        recaudacion_por_seccion = 0;
         recaudacion_por_seccion = run_queue(cola,recorrer,cabeza->pbase);
         recaudacion = recaudacion + run_queue(cola,recorrer,cabeza->pbase);
         fprintf(arch,"sector %d --- recaudacion de la seccion %li\n",recorrer->id,recaudacion_por_seccion);
