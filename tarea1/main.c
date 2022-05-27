@@ -46,7 +46,7 @@ int main(int argc, char **argv){
     printf("\nSECCIONES ORDENADAS DE LA MAS CARA A LA MAS BARATA\n\n");
     int i = 1;
     int entradas = 0;
-    char *id = malloc(sizeof(char[20]));
+    char id[20];
     while(i<=nro_clientes){
         int ident = 20000 + i;
         sprintf(id,"%d",ident);
@@ -55,9 +55,6 @@ int main(int argc, char **argv){
         int c_entr = cantidad_entradas(cabeza,presupuesto,pre);
         enqueue(cola,id,presupuesto,n_sec,c_entr);
         entradas = entradas + c_entr;
-        //printf("id del cliente: %s --- presupuesto del cliente: %li\n",id,presupuesto);
-        //printf("id del sector: %d --- cantidad de entradas compradas: %d\n",n_sec,c_entr);
-        //printf("entradas vendidas:%d\n\n",entradas);
         i= i + 1;
         if(entradas>= cant_externo && (entradas % cant_externo == 0 || entradas %cant_externo == 1) ){
             lista_externa_sum(cabeza);

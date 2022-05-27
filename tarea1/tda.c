@@ -83,12 +83,13 @@ void ordenar_lista(sector *cabeza){
 
 //IMPLEMENTACION DE FUNCIONES DE COLA PARA CLIENTES
 
-void enqueue(queue *cola,char *id,int presupuesto,int n_seccion,int n_entradas){
+void enqueue(queue *cola,char *ide,int presupuesto,int n_seccion,int n_entradas){
     fans *temp = malloc(sizeof(fans));
     temp->presupuesto = presupuesto;
     temp->n_seccion = n_seccion;
     temp->n_entradas = n_entradas;
-    temp->id = id;
+    temp->id = malloc(sizeof(ide));
+    temp->id = ide;
     temp->sgte = NULL;
     if(cola->head == NULL){
         cola->head = temp;    //encola primer elemento
@@ -158,8 +159,8 @@ long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch){
     while(recorrer!=NULL){
         recaudacion_por_seccion = 0;
         recaudacion_por_seccion = run_queue(cola,recorrer,cabeza->pbase);
-        recaudacion = recaudacion + run_queue(cola,recorrer,cabeza->pbase);
         fprintf(arch,"sector %d --- recaudacion de la seccion %li\n",recorrer->id,recaudacion_por_seccion);
+        recaudacion = recaudacion + run_queue(cola,recorrer,cabeza->pbase);
         recorrer = recorrer->sgte;
     }
     return recaudacion;
