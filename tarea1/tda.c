@@ -83,7 +83,7 @@ void ordenar_lista(sector *cabeza){
 
 //IMPLEMENTACION DE FUNCIONES DE COLA PARA CLIENTES
 
-void enqueue(queue *cola,char *ide,int presupuesto,int n_seccion,int n_entradas){
+void enqueue(queue *cola,char *ide,long int presupuesto,int n_seccion,int n_entradas){
     fans *temp = malloc(sizeof(fans));
     temp->presupuesto = presupuesto;
     temp->n_seccion = n_seccion;
@@ -101,7 +101,7 @@ void enqueue(queue *cola,char *ide,int presupuesto,int n_seccion,int n_entradas)
 }
 
 
-int nro_seccion_cliente(sector *cabeza, int presupuesto, int precio){
+int nro_seccion_cliente(sector *cabeza, long int presupuesto, int precio){
     sector *recorrer = cabeza;
     int nro_seccion=0;
     while(recorrer!=NULL){
@@ -115,7 +115,7 @@ int nro_seccion_cliente(sector *cabeza, int presupuesto, int precio){
     return nro_seccion;
 }
 
-int cantidad_entradas(sector *cabeza, int presupuesto, int precio){
+int cantidad_entradas(sector *cabeza, long int presupuesto, int precio){
     sector *recorrer = cabeza;
     int nro_boletos = 0;
     while(recorrer!=NULL){
@@ -150,15 +150,15 @@ void lista_externa_sum(sector *cabeza){
     printf("---Fin De Lista---\n\n");
 }
 
-long int run_queue(queue *cola, sector*cabeza, int pbase); // declaracion de variable interna que solo usa una funcion que se conecta al .c externo
+unsigned long int run_queue(queue *cola, sector*cabeza, int pbase); // declaracion de variable interna que solo usa una funcion que se conecta al .c externo
 
-long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch){
+unsigned long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch){
     sector *recorrer = cabeza->secc;
-    long int recaudacion = 0;
-    long int recaudacion_por_seccion;
+    unsigned long int recaudacion = 0;
     while(recorrer!=NULL){
-        recaudacion_por_seccion = 0;
+        unsigned long int recaudacion_por_seccion = 0;
         recaudacion_por_seccion = run_queue(cola,recorrer,cabeza->pbase);
+        fprintf(arch,"precio base %d -- n_seccion %d\n",cabeza->pbase,recorrer->id);
         fprintf(arch,"sector %d --- recaudacion de la seccion %li\n",recorrer->id,recaudacion_por_seccion);
         recaudacion = recaudacion + run_queue(cola,recorrer,cabeza->pbase);
         recorrer = recorrer->sgte;
@@ -166,7 +166,7 @@ long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch){
     return recaudacion;
 }
 
-long int run_queue(queue *cola, sector*cabeza, int pbase){
+unsigned long int run_queue(queue *cola, sector*cabeza, int pbase){
     fans *temp = cola->head;
     sector *recorrer = cabeza;
     long int recaudacion = 0;
