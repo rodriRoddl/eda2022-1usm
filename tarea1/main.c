@@ -81,6 +81,10 @@ int main(int argc, char **argv){
         i = i + 1;
     }
 
+    clean_list(cabeza);
+    clean_queue(cola);
+    free(cola->head);
+    free(cola->final);
     free(cola);
     free(cabeza);
     free(estadio);

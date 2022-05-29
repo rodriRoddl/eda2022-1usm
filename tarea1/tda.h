@@ -22,3 +22,6 @@ void lista_externa_sum(sector *cabeza);
 unsigned long int recaudacion_queue(queue *cola,stadium *cabeza,FILE *arch);
 
 //FUNCIONES PARA LIMPIAR LA LISTA PARA SU POSTERIOR FREE
+
+void clean_list(sector *cabeza);
+void clean_queue(queue *cola);

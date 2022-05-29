@@ -178,3 +178,24 @@ unsigned long int run_queue(queue *cola, sector*cabeza, int pbase){
     }
     return recaudacion;
 }
+
+//FUNCIONES PARA HACER LA LIMPIEZA Y EVITE DE FUGAS
+
+void clean_list(sector *cabeza){
+    sector *recorrer = cabeza;
+    while(recorrer!=NULL){
+        cabeza = recorrer->sgte;
+        free(recorrer);
+        recorrer = cabeza;
+    }
+}
+
+void clean_queue(queue *cola){
+    fans *recorrer = cola->head;
+    while(recorrer!=NULL){
+        cola->head = recorrer->sgte;
+        free(cola->head->id);
+        free(recorrer);
+        recorrer = cola->head;
+    }
+}
