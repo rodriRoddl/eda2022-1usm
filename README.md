@@ -1,13 +1,13 @@
 # conejo !Bueno
 
-========================================================================================================================================================  
+======================================================================================
 
 **Descripción del programa**
 
 El programa consiste en la implementacion de TDA, en este caso de cola y lista enlazada simple usando el lenguaje de C, para asi llevarlo al contexto del
 programa de compra y venta del cantante conejo !Bueno.
 
-========================================================================================================================================================
+======================================================================================
 
 **condiciones de compilacion y ejecución**
 
