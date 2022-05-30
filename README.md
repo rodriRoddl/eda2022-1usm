@@ -8,6 +8,7 @@ El programa consiste en la implementacion de TDA, en este caso de cola y lista e
 programa de compra y venta del cantante conejo !Bueno.
 
 ========================================================================================================================================================
+
 **condiciones de compilacion y ejecución**
 
 Para poder usar el programa de manera adecuada es recomendado usar distribuciones de Linux como : Ubuntu(recomendada), Devian, Mint, etc.  
