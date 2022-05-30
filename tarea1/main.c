@@ -33,7 +33,9 @@ int main(int argc, char **argv){
     ordenar_lista(cabeza);
     node_stadium(&estadio,cabeza,nsec,pre);
     int suma_asientos = list_sum(cabeza);
+
     //VEMOS LA FILA DE CLIENTES, ITEM 2, USO DE COLAS
+
     srand(time(NULL));
     long int nro_clientes = /*suma_asientos**/suma_asientos*(rand () % (20 - 5 + 1) + 5); //forma natural de determinar un randon entre rangos: (M - n + 1) + n, con M mayor y n menor
     int precio_alto = 3*pre*primer_fac;
@@ -58,10 +60,11 @@ int main(int argc, char **argv){
         if(n_sec == 0){
             sin_entradas = sin_entradas +1;
         }
+        //REPORTE EXTERNO
         if(entradas >= cant_externo && (entradas % cant_externo == 0 || entradas %cant_externo == 1)){
             lista_externa_sum(cabeza);
         }
-
+        //REPORTE INTERNO
         if(entradas >= porcentaje && (entradas %  porcentaje == 0 || entradas % porcentaje == 1)){
             char *nombre = malloc(sizeof(char[20]));
             sprintf(nombre,"%0.0f",factor_percent*pct_interno*100);
@@ -80,13 +83,13 @@ int main(int argc, char **argv){
         }
         i = i + 1;
     }
-
     clean_list(cabeza);
     clean_queue(cola);
     free(cola->head);
     free(cola->final);
     free(cola);
     free(cabeza);
+    free(estadio->secc);
     free(estadio);
     return 0;
 }
