@@ -37,3 +37,9 @@ En caso de no poder usar Makefile, puede utilizar el siguiente paso de comandos 
     ./TEST "estadio1.txt"
     rm *%.txt *.o
 
+======================================================================================
+
+**informacion del programador**
+
+Rodrigo Lobos, estuidante de Ingeniería Civil Telemática, Universidad Técnica Féderico Santa María.
+
