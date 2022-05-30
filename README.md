@@ -19,6 +19,21 @@ Para poder hacer la compilación del programa, usaremos la funcion gcc, si es qu
 
 Luego de la instalación de la función, usaremos el siguiente comando el consola para la compilación:
 
-  make
+    make
 
-Este comando lo utilizaremos para la compilacion completa del programa, el archivo ejecutable será un ./TEST, 
+Este comando lo utilizaremos para la compilacion completa del programa, el archivo ejecutable será un ./TEST, el cual podrá ejecutar con:
+
+    make exe
+
+Para finalizar, si quiere limpiar los archivos restantes de la compilación, puede ejecutar:
+    
+    make clean
+
+**caso por terminal**
+
+En caso de no poder usar Makefile, puede utilizar el siguiente paso de comandos para compilación, ejecución y limpiar archivos:
+
+    gcc tda.c main.c -o TEST -Wall
+    ./TEST "estadio1.txt"
+    rm *%.txt *.o
+
