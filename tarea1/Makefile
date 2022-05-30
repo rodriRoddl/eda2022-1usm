@@ -5,7 +5,6 @@ FLAGS1= -lm -ltr
 #nom: dep1 dep2 dep3 ...
 #all: dependencias
 #BIN: dependencias
-all: TEST clean exe
 
 TEST: main.o tda.o
 	$(CC) -o $@ $^ $(FLAGS1)
