@@ -19,6 +19,6 @@ Para poder hacer la compilación del programa, usaremos la funcion gcc, si es qu
 
 Luego de la instalación de la función, usaremos el siguiente comando el consola para la compilación:
 
-  gcc tda.c main.c -o prueba -Wall
+  make
 
-De esta forma, nos aseguraremos 
+Este comando lo utilizaremos para la compilacion completa del programa, el archivo ejecutable será un ./TEST, 
