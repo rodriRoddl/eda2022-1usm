@@ -3,8 +3,8 @@
 #include <string.h>
 
 typedef struct twitter{
-char * fecha;
-char * hora;
-char * user;
-char * mensaje;
+    char * fecha;
+    char * hora;
+    char * user;
+    char * mensaje;
 }tweet;
