@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int main(int argc, char *argv[]){
     FILE *arch;
@@ -16,15 +17,16 @@ int main(int argc, char *argv[]){
     tweet data[it];
     rewind(arch);
     while(!feof(arch)){
-        data[append].fecha = (char*)malloc(sizeof(char*)*12);
-        data[append].hora = (char*)malloc(sizeof(char*)*12);
-        data[append].user = (char*)malloc(sizeof(char*)*12);
-        data[append].mensaje = (char*)malloc(sizeof(char*)*250);
+        data[append].fecha = malloc(sizeof(char*)*12);
+        data[append].hora = malloc(sizeof(char*)*12);
+        data[append].user = malloc(sizeof(char*)*12);
+        data[append].mensaje = malloc(sizeof(char*)*355);
         fscanf(arch,"%[^;];%[^;];%[^;];%[^\n]",data[append].fecha,data[append].hora,data[append].user,data[append].mensaje);
-        printf("%s  %s  %s  %s\n",data[append].fecha,data[append].hora,data[append].user,data[append].mensaje);
+        //printf("%s  %s  %s  %s\n",data[append].fecha,data[append].hora,data[append].user,data[append].mensaje);
         append = append +1;
     }
-    
+    printf("funciona\n");
+    insertionSort(data,it);
     //uso de insert sort para pregunta 1 de orden= n^2
     //uso de merge sort para pregunta 2, de orden = nlog(n)
     //crear sorting.c para las implementaciones de los algoritmos
