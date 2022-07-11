@@ -20,13 +20,7 @@ Luego de la instalación de la función, usaremos el siguiente comando el consol
 
     make
 
-Este comando lo utilizaremos para la compilacion completa del programa, el archivo ejecutable será un ./TEST, el cual podrá ejecutar con:
-
-    make exe
-
-Para finalizar, si quiere limpiar los archivos restantes de la compilación, puede ejecutar:
-    
-    make clean
+MUY IMPORTANTE: para que pueda funcionar el make, recuerde agregar el archivo "tweets.csv" en la carpeta donde contenga el programa 
 
 **caso por terminal**
 
