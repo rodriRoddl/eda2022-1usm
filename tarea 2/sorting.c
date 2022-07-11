@@ -5,7 +5,7 @@
 #include <time.h>
 #include <math.h>
 
-void insertionSort(tweet arr[], int n){
+double insertionSort(tweet arr[], int n){
 int i, j;
 double value;
 tweet key;
@@ -19,6 +19,9 @@ for (i= 1 ; i < n ; i ++){
     }
     arr [j+1] = key;
     }
+clock_t end = clock();
+value = (double)(end-start)/CLOCKS_PER_SEC; 
+return value;
 }
 
 void merge(tweet arr[], int l, int m,int r){
@@ -50,13 +53,18 @@ void merge(tweet arr[], int l, int m,int r){
     }
 }
 
-void mergeSort(tweet arr[],int l, int r){
+double mergeSort(tweet arr[],int l, int r){
+    double value;
+    clock_t start = clock();
     if(l<r){
     int m = l + (r-l)/2;
     mergeSort(arr,l,m);
     mergeSort(arr,m+1,r);
     merge(arr,l,m,r);
     }
+    clock_t end = clock();
+    value = (double)(end-start)/CLOCKS_PER_SEC; 
+    return value;
 }
 
 tweet maximo(tweet *A, int tam){
@@ -71,9 +79,9 @@ tweet maximo(tweet *A, int tam){
 }
 
 void CountingSort(tweet *A, int tam, int lugar){
-    tweet B[tam];
+    //tweet B[tam];
     char y[4],m[2],d[2];
-    int  i , ind_sgte,veces,fecha;
+    int  i /*, ind_sgte,veces*/,fecha;
     int max = 0;
     for(i=1;i<tam;i++){
         sscanf(A[i].fecha,"%s:%s:%s",y,m,d);
@@ -87,16 +95,20 @@ void CountingSort(tweet *A, int tam, int lugar){
     //no se que mas hacer a partir de aca.
 }
 
-void RadixSort(tweet *A, int tam){
+double RadixSort(tweet *A, int tam){
     int pos, fecha;
+    double value;
+    clock_t start = clock();
     char y[4],m[2],d[2];
     tweet max = maximo(A,tam);
     sscanf(max.fecha,"%s:%s:%s",y,m,d);
     strcat(y,m);
     strcat(y,d);
     fecha = atoi(y);
-    printf("%d",fecha);
     for(pos = 0; (fecha / pow(10,pos)) > 0 ;pos++){
         CountingSort(A,tam,pow(10,pos));
     }
+    clock_t end = clock();
+    value = (double)(end-start)/CLOCKS_PER_SEC; 
+    return value;
 }

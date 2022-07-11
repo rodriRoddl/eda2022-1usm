@@ -22,23 +22,27 @@ int main(int argc, char *argv[]){
         //printf("%d\n",append);
         append = append +1;
     }
+    fclose(arch);
     int opcion;
-    printf("elija el algoritmo de ordenamiento:");
+    double time_response;
     printf("1)InsertSort (n^2)\n2)mergeSort(n log n)\n3)Radixsort(d(c*n))\n");
     printf("elija el algoritmo de ordenamiento: ");
     scanf("%d",&opcion);
+    FILE *file = fopen("reporte.txt","w+");
     if(opcion == 1){
-        insertionSort(data,it);
+        time_response = insertionSort(data,it);
+        fprintf(file,"Tiempo de ejecucion de insertSort: %f [s]",time_response);
     }
     else if(opcion == 2){
-        mergeSort(data,0,it);
+        time_response = mergeSort(data,0,it);
+        fprintf(file,"Tiempo de ejecucion de mergeSort: %f [s]",time_response);
     }
     else if(opcion == 3){
-        RadixSort(data,it);
+        time_response = RadixSort(data,it);
+        fprintf(file,"Tiempo de ejecucion de RadixSort: %f [s]",time_response);
     }
     else{
         printf("error al elegir metodo");
     }
-    fclose(arch);
     return 0;
 }
